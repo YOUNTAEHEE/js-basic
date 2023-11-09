@@ -13,136 +13,48 @@
 
   <script>
     /*
-    변수: 자주쓰는 값을 담아서 재활용하기 위한 임시 공간
-    let: 자주 바뀔만한 값은 let으로 만든 변수에 담는다.
-    const: 바뀌면 안되는 중요한 값은 const 방식으로 만든 변수에 담는다.
-
-    let a = 'test'; a라는 변수에 'test'라는 문자를 저장(a변수는 let선언 방식이라 추후 덮어쓰기 가능)
-    const myname = '홍길동'; myname이라는 변수에 '홍길동' 이름 저장(myname const선언방식이라 덮어쓰기 불가능)
----------
-    문자열 vs 숫자
-    문자:따옴표로 감싸서 표현
-    숫자:숫자만 입력
-
-    강제로 숫자나 변수가 문자화 되는 경우: 따옴표로 감싸는 순간
----------
-    연산자: 특정값을 도출하기 위한 연산식별자 (산술연산자, 비교연산자, 대입연산자)
-    :산술연산자는 숫자값 연산
-    :비교연산자는 복수개의 값을 비교해서 true, false반환
-    :대입연산자는 우항을 연산된 결과값을 좌항에 대입
-    :복합대입연산자: 대입연산자와 산술연산자가 결합된 형태
-    
-    %는 특정값을 나누는 연산자가 아닌 나눈 몫의 나머지를 구하는 연산자
-    ==값만 비교, ===값이랑 자료형 같이 비교, !=값이 달라야 true
-
-    let num; 변수선언
-    num=1; 변수에 값할당
-    let num=1; 변수를 초기화
-    num = num+1; 자기자신 값에 1을 더한 값을 다시 자기자신에 재할당
-
-    let num2 = 2;
-    let num2 = num2+1; 이미 선언된 변수를 또 재선언하면 에러남
-
-    조건문(조건식의 결과에 따라 분기처리)
-    :비교연산자를 활용해서 반환되는 true, false값에 따라의 코드의 분기처리
-    if(조건식1){
-      
-    } else if(조건식2){
-
-    }else{
-
-    }
-
-    아래가 실제 개발시 제일 많이 활용된 패턴, 
-    :조건이 여러개 있을때 해당 구문을 반복처리하기 위함
-    :만약 아래 조건식에 부합되는 경우가 없으면 아무 코드도 실행되지 않음
-    if(조건식1){실행할 코드블록}
-    if(조건식2){실행할 코드블록}
-    if(조건식3){실행할 코드블록}
-    
-    //특정 조건일때 딱 한줄의 코드만 실행되면 되고
-    특정 조건이 아니면 아무일도 발생시키지 않을때 아래와 같은 표현식 많이씀
-    if(조건식) 실행할 코드 한줄;
-    
+    함수 (function):자주 쓰는 여러개의 코드들을 패키징해서 재활용하기 위함
+    :함수를 먼저 정의한 이후 호출가능
+    :함수 정의시 이름을 안붙인함수는 익명함수, 이름을 붙인함수 기명함수
+    매개변수(parameter), 인수(argument)
+    :매개변수-외부의 값을 함수 내부로 전달하기 위한 통로명
+    :인수-함수의 매개변수를 통해서 전달되는 값 자체
+    */
+    //익명함수 기명함수(?)
+    //함수의 정의 (name이라는 매개변수가 연결되어 있는 함수)
+    /*    function inform(name) {
+          console.log(name + '님 안녕하세요.');
+        }
+        //함수 호출(inform함수 호출시 '홍길동'이라는 인수 전달)
+        inform('홍길동');
     */
 
-
-    //시간값만 반환해주는 메서드
-    const hour = new Date().getHours();
-    console.log(hour);
-
-    console.log(11 >= hour);
-
-    /*    let num = 1;
-        console.log(num);
-        num = num + 2;
-        console.log(num);
-    
-        num += '1';
-        console.log(num);
-    
-        num++;
-        console.log(num);
-    
-        num--;
-        console.log(num);
-    
-        const abc = 3;
-        console.log(abc);
-    
-    
-        console.log(true || false);*/
-
-    //현재시간이 5~11사이면 body배경색상 orange변경
-    if (hour >= 5 && hour < 12) {
-      document.body.style.backgroundColor = 'orange';
+    //미션1: 두개의 숫자를 파라미터를 통해 인수로 전달받아서 두개를 더한 값을 콘솔로 출력하는 함수
+    function plus(num1, num2) {
+      if (typeof num1 !== 'number') {
+        console.log('숫자만 전달하세요');
+      } else if (typeof num2 !== 'number') {
+        console.log('숫자만 전달하세요');
+      } else {
+        console.log(num1 + num2);
+      }
     }
-    //현재시간이 11~15사이면 body배경색상 lightblue변경
-    if (hour >= 11 && hour <= 15) {
-      document.body.style.backgroundColor = 'lightblue';
+    plus(2, 4);
+    //미션2: 만약에 파라미터로 전달되는 값중에서 2개의 값중 하나라도 숫자가 아니면 더한 값이 아닌 숫자만 전달하세요 라는 에러 문구 출력 typeof, if문 활용
+    //typeof 변수값 :자료형을 문자로 반환
+    function plus2(num3, num4) {
+      //첫번째 , 두번째 파라미터로 전달되는 값의 자료형을 문자열로 변수에 저장
+      const type1 = typeof num3;
+      const type2 = typeof num4;
+      //두 변수의 타입문자값이 모두 number(숫자)이면 두개값을 더해서 콘솔출력
+      if (type1 === 'number' && type2 === 'number') {
+        console.log(num1 + num2);
+        //만약 그렇지 않은 경우는 에러문구 출력
+      } else {
+        console.log('두개의 인수를 모두 숫자로 전달하세요')
+      }
+
     }
-    //현재시간이 15~19사이면 body배경색상 pink변경
-    if (hour >= 15 && hour <= 19) {
-      document.body.style.backgroundColor = 'pink';
-    }
-    //현재 시간이 19보다 크고 5보다 작으면 black으로 변경
-    if (hour > 19 && hour < 5) {
-      document.body.style.backgroundColor = 'black';
-    }
-
-
-    //배열: 같은 성격의 여러개의 값들을 그룹화할때 쓰는 자료형
-    /*   const 변수명 = [값1, 값2, 값3];
-        배열값을 뽑을때는
-        배열이 있는 변수명[순번];
-        
-        배열을 쓰는 이유
-        :배열로 굳이 같은 성격의 데이터를 묶어두는 이유는 (반복문을 써서 자동화 처리하기 위함)
-
-        배열의 갯수를 구하는 방법
-        배열명.length
-        */
-
-    /*
-    변수명 작성시 주의점
-    1.변수명 숫자로 시작불가
-    2.변수명 가급적 영어로 
-    3.변수명 대소문자 구분
-    4.변수명에 특수문자 사용불가(예외적으로 _, $ 는 사용가능)
-    */
-    /*객체: 여러개의 값을 그룹화 (자료구조가 복잡할때)
-    const iphone={
-      price:100,//한줄이 property
-      color:'white'//앞에거는 key 뒤에거는 value
-      isSale:false
-    }
-    객체값을 뽑을때
-    console.log(iphone.price)
-    console.log(iphone['color'])
-    객체값추가할때
-    iphone.weight='1kg';
-
-    */
 
   </script>
 </body>
