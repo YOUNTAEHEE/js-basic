@@ -64,21 +64,68 @@
 
     //화살표함수는 대입형함수처럼 써야함. (리액트)
     //리액트 개발아닐시에는 선언적 함수처럼 씀 근데 리액트는 대입형함수로 함 (함수선언이전에 호출, 함수선언이후에 호출)
-  /*  
-    선언적함수는 읽히는 시점이 
-    런타임..?, 순차적.. 런타임.. 
-    자바스크립트가 
-    우선적으로 실행시 확인하는게 변수, 그다음 선언적함수 확인
-    대입형함수는    
-    console.log(minus);
-    
-        var minus = function (num1, num2) {
-          return num1 - num2;
+    /*  
+      선언적함수는 읽히는 시점이 
+      런타임..?, 순차적.. 런타임.. 
+      자바스크립트가 
+      우선적으로 실행시 확인하는게 변수, 그다음 선언적함수 확인
+      대입형함수는    
+      console.log(minus);
+      
+          var minus = function (num1, num2) {
+            return num1 - num2;
+          }
+      ->undefined로 뜸:
+      메모리가 읽는데 값이 할당 안됨.런타임 판단단계에서 다 읽어서 이미 마이너스 변수를 읽어서 언디파인드값이 들어가지는거임, 함수를 읽기 전에 변수를 먼저 읽으니까.못읽게 하려는 게 let으로 변수를 선언하는 것임.
+   // 변수에 선언된값까지 읽어주지는 않음
+  */
+    /*
+    화살표 함수(대입형함수를 축약한 형태)
+        const multiply=(num1, num2)=>{
+          return num1*num2;
         }
-    ->undefined로 뜸:
-    메모리가 읽는데 값이 할당 안됨.런타임 판단단계에서 다 읽어서 이미 마이너스 변수를 읽어서 언디파인드값이 들어가지는거임, 함수를 읽기 전에 변수를 먼저 읽으니까.못읽게 하려는 게 let으로 변수를 선언하는 것임.
- // 변수에 선언된값까지 읽어주지는 않음
-*/
+        const result=multiply(2, 3);
+        console.log('multiply', result);
+        
+        //화살표함수에서 return문 생략한 형태
+          const multiply2=(num1, num2)=>( 
+            //화살표뒤에 중괄호가 없고 특정값을 도출하는 연산식이 있으면 해당 값 자동리턴
+          num1*num2;
+        )
+        console.log('multiply2', multiply2(3,5));
+    
+        //최종적으로 이렇게 씀 
+        const multiply2=(num1, num2)=>  num1*num2;    
+        //화살표 뒤에 중괄호 리턴문 없이 바로 연산식이 있으면 해당값 자체가 리턴되는 형태
+        const multiply=(num1, num2)=>{
+          return num1*num2;
+        }
+        위의 리턴함수와 동일한 구문
+    
+        굳이 리턴할 필요가 없는 함수라도 코드의 간결화를 위해 축약하는 경우도 있음
+        const introduce3 = name =>console.log(name + '님 반갑습니다.');
+        introduce3('홍길동');
+    
+        const introduce3 = name =>name && console.log(name + '님 반갑습니다.');
+        introduce3('홍길동');
+        
+    */
+    //오늘 수업내용에서 무조건 이해해야되는 내용
+    //1. 함수에 인수 전달하고 내부값 리턴으로 내보내기
+    const multiply = (num1, num2) => {
+      return num1 * num2;
+    }
+    const result = multiply(2, 3);
+    console.log('multiply', result);
+
+    //2.함수안쪽에서 조건문과 리턴을 활용해 함수 강제 종료
+    function intro(name) {
+      if (!name) return;
+      console.log(name + '님 반갑습니다.');
+    }
+    intro('홍길동');
+    intro();
+
   </script>
 </body>
 
