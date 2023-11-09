@@ -109,6 +109,28 @@
     }
     heavyWork(3);
     
+-------------------
+    true, false값은 아니지만 true, false로 인지되는 값들
+    true로 인지되는 값들
+    :빈문자가 아닌 문자값 
+    :0이 아닌 숫자값
+
+    false로 인지되는 값들
+    :빈문자값
+    :숫자0
+    :undefined
+    :null
+
+->    아래의 경우 data에 아무런 값도 없을 시 false이니까 
+    데이터가 없을때 false일때 종료해라라는 뜻
+function heavyWork(data){
+     if(!data) return;
+      console.log(data);
+      console.log(data);
+      console.log(data);
+    }
+    heavyWork(3);
+    
 
     */
   </script>
