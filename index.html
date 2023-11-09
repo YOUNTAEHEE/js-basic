@@ -13,191 +13,72 @@
 
   <script>
     /*
-    함수 (function):자주 쓰는 여러개의 코드들을 패키징해서 재활용하기 위함
-    :함수를 먼저 정의한 이후 호출가능
-    :함수 정의시 이름을 안붙인함수는 익명함수, 이름을 붙인함수 기명함수
-    매개변수(parameter), 인수(argument)
-    :매개변수-외부의 값을 함수 내부로 전달하기 위한 통로명
-    :인수-함수의 매개변수를 통해서 전달되는 값 자체
-    */
-    //익명함수 기명함수(?)
-    //함수의 정의 (name이라는 매개변수가 연결되어 있는 함수)
-    /*    function inform(name) {
-          console.log(name + '님 안녕하세요.');
-        }
-        //함수 호출(inform함수 호출시 '홍길동'이라는 인수 전달)
-        inform('홍길동');
+    함수의 종류
+    익명함수:함수에 이름이 없는 형태(변수에 익명함수를 대입해서 주로 호출)
+    기명함수:함수에 이름이 있는 형태(function키워드로 선언하고 호출)
+ 
+    선언적함수:function 키워드로 이름을 붙여서 선언하는 형태
+    :함수의 호출 위치가 자유로움(함수 선언이전에 호출가능)
+    선언적함수가 선언되기 전에 호출가능한 이유
+    :자바스크립트 파일을 실행하기 이전에 판단단계에서 미리 변수와 선언적함수를 우선적으로 해석하기 때문 호출 가능
+    대입형함수 :일반변수에 일반함수를 대입하는 형태
+    :함수가 변수에 대입되는 형태이기 때문에 함수가 대입된 이후에만 호출가능
+    즉시실행함수:익명함수 형태로 함수를 정의하자마자 자기자신을 즉시 호출하는 함수 형태
+ 
+    ES6
+    화살표함수:익명함수를 간소화 처리(내부적으로 this객체를 생성하지 않는 함수)
     */
 
-    //미션1: 두개의 숫자를 파라미터를 통해 인수로 전달받아서 두개를 더한 값을 콘솔로 출력하는 함수
+    /*
+    //선언적 함수
     function plus(num1, num2) {
-      if (typeof num1 !== 'number') {
-        console.log('숫자만 전달하세요');
-      } else if (typeof num2 !== 'number') {
-        console.log('숫자만 전달하세요');
-      } else {
-        console.log(num1 + num2);
-      }
-    }
-    plus(2, 4);
-    //미션2: 만약에 파라미터로 전달되는 값중에서 2개의 값중 하나라도 숫자가 아니면 더한 값이 아닌 숫자만 전달하세요 라는 에러 문구 출력 typeof, if문 활용
-    //typeof 변수값 :자료형을 문자로 반환
-    function plus2(num3, num4) {
-      //첫번째 , 두번째 파라미터로 전달되는 값의 자료형을 문자열로 변수에 저장
-      const type1 = typeof num3;
-      const type2 = typeof num4;
-      //두 변수의 타입문자값이 모두 number(숫자)이면 두개값을 더해서 콘솔출력
-      if (type1 === 'number' && type2 === 'number') {
-        console.log(num1 + num2);
-        //만약 그렇지 않은 경우는 에러문구 출력
-      } else {
-        console.log('두개의 인수를 모두 숫자로 전달하세요')
-      }
+      return num1 + num2;
 
     }
+    console.log(plus(2, 3));
+
+
+//아래의 경우에도 console출력이 됨
+    console.log(plus(2, 3));
+
+    function plus(num1, num2) {
+      return num1 + num2;
+
+    }
+*/
     /*
-        반환값(return)
-        :함수 내부에서 만들어진 값을 함수 외부로 물리적으로 내보냄
-        :함수 코드블록 안에서 만들어진 값은 외부에서 접근 불가 (지역 스코프)
+        //대입형함수//익명함수
+        const minus = function (num1, num2) {
+          return num1 - num2;
+        }
+        console.log(minus(5, 2));
     
-        반환값이 필요한 이유
-        :함수 내부에서 만들어진 값이 1회성으로 소비되는 것이 아닌
-        :추후 다른 형태로 재사용이 되야될때 함수외부로 값을 내보냄
+        //아래의 경우 출력안됨
+        console.log(minus(5, 2));
     
-        return의 다른 쓰임
-        :함수 내부에서 return문을 만나면 그 즉시 함수 실행 종료
-        :함수 내부로직에서 에러가 발생될만한 상황이면 불필요하게 다음 코드들을 실행하지 않고 
-        해당 함수를 강제 종료해야 될때
-      */
-    //다른 함수에도 쓴 파라미터 또 다른 함수에서 써도됨 지역 스코프임. 
-    function returnPlus(num1, num2) {
-      const result = num1 + num2;
-      return result;
-    }
-    //리턴값이 있는 함수 호출
-    console.log(returnPlus(2, 3));
-    //2,3을 더한 값과 4,5를 더한 겂을 다시 더해주세요
-    const result1 = returnPlus(2, 3);
-    const result2 = returnPlus(4, 5);
-    console.log(result1 + result2);
-    console.log(returnPlus(2, 3) + returnPlus(4, 5));
-
-    /*
-    args->아규먼트를 이렇게 쓰기도 함 
-
-    엄청 로직이 무거운 함수
-    function heavyWork(data){
-      console.log(data);
-    }
-    heavyWork();->undefined라고 찍힘. 
-
-    function heavyWork(data){
-     if(data!==undefined){
-      console.log(data);
-  
-      }
-    }
-    heavyWork(3);
-
-    위의 코드 보다 아래의 코드가 보기 편함, 아래처럼 쓰는 방식을 많이 씀. 
- //에러상황이 발생되서 불필요하게 코드를 실행할 필요가 없을 때 강제로 return을 이용해서 강제 함수 실행 중지
-    function heavyWork(data){
-     if(data===undefined) return;
-      console.log(data);
-      console.log(data);
-      console.log(data);
-    }
-    heavyWork(3);
+        const minus = function (num1, num2) {
+          return num1 - num2;
+        }
     
--------------------
-    true, false값은 아니지만 true, false로 인지되는 값들
-    true로 인지되는 값들
-    :빈문자가 아닌 문자값 
-    :0이 아닌 숫자값
-
-    false로 인지되는 값들
-    :빈문자값
-    :숫자0
-    :undefined
-    :null
-
-->    아래의 경우 data에 아무런 값도 없을 시 false이니까 
-    데이터가 없을때 false일때 종료해라라는 뜻
-function heavyWork(data){
-     if(!data) return;
-      console.log(data);
-      console.log(data);
-      console.log(data);
-    }
-    heavyWork(3);
-    
-
     */
 
-    function visit(name) {
-      if (typeof name !== 'string') {
-        return ('이름값을 입력하세요');
-      } else {
-        return (name + '님 반갑습니다.');
-      }
-    }
-
-    console.log(visit('홍'));
-
-    //이름값이 인수로 전달되면 인사말 출력, 이름값 미전달시 경고문 출력(조건문, 함수)
-    function introduce(name) {
-      if (name) {
-        console.log(name + '님 반갑습니다.');
-      } else {
-        console.log('사람이름을 인수로 넣어주세요.');
-      }
-    }
-    introduce('홍길동');
-
-    /*
-    삼항연산자 (if, else문을 3개의 항을 이용해서 간소화한 형태)
-    삼항연산자를 쓰는 경우는 조건식의 true, false값에 실행할 구문의 한줄의 간단한 구문일때
-    리액트 개발에서 JSX라는 가상돔 출력구문안에는 조건문을 3항 연산자만 사용가능
-    조건식 ? 조건식이 true일때 실행할 구문: 조건식이 false일때 실행할 구문
-     */
-    //  삼항연산자로 고도화시킨 함수  //젤많이 씀
-    function introduce2(name) {
-      name ? console.log(name + '님 반갑습니다.') : console.log('사람이름을 인수로 넣어주세요.');
-
-    }
-
-    //인수값이 있을때만 실행되는 함수를 작성시, else필요없을때
-    function introduce2(name) {
-      if (name) console.log(name + '님 반갑습니다.');
-    }
-
-    //name값이 있을때만 실행, else필요없을때 //젤많이 씀
-    function introduce2(name) {
-      name && console.log(name + '님 반갑습니다.');
-    }
-
-
-    function introduce2(name) {
-      let result = '';
-      //&&연산자뒤에 대입연산자가 들어올수 없으므로 (대입연산구문을 괄호처리해서 그룹화)
-      //      name && result = name;
-      //아래처럼하기    
-      name && (result = name);
-
-      return result;
-    }
-
-    //이렇게 많이씀(강사님이라면 else필요시 이렇게 쓸거임(?))
-    function introduce2(name) {
-      let defaultName = '아무개';
-      //name에 암것도 없으면 아무개로 콘솔 출력(name에defaultName값 대입)
-      !name && (name = defaultName); //이거는 앞에 false면 뒤에 true거로 실행한다 이거임.
-      //name에 뭐가 있으면 name값으로 출력
-      console.log(name + '님 반갑습니다.');
-
-    }
-
-
+    //화살표함수는 대입형함수처럼 써야함. (리액트)
+    //리액트 개발아닐시에는 선언적 함수처럼 씀 근데 리액트는 대입형함수로 함 (함수선언이전에 호출, 함수선언이후에 호출)
+  /*  
+    선언적함수는 읽히는 시점이 
+    런타임..?, 순차적.. 런타임.. 
+    자바스크립트가 
+    우선적으로 실행시 확인하는게 변수, 그다음 선언적함수 확인
+    대입형함수는    
+    console.log(minus);
+    
+        var minus = function (num1, num2) {
+          return num1 - num2;
+        }
+    ->undefined로 뜸:
+    메모리가 읽는데 값이 할당 안됨.런타임 판단단계에서 다 읽어서 이미 마이너스 변수를 읽어서 언디파인드값이 들어가지는거임, 함수를 읽기 전에 변수를 먼저 읽으니까.못읽게 하려는 게 let으로 변수를 선언하는 것임.
+ // 변수에 선언된값까지 읽어주지는 않음
+*/
   </script>
 </body>
 
