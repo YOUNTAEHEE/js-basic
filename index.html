@@ -133,6 +133,71 @@ function heavyWork(data){
     
 
     */
+
+    function visit(name) {
+      if (typeof name !== 'string') {
+        return ('이름값을 입력하세요');
+      } else {
+        return (name + '님 반갑습니다.');
+      }
+    }
+
+    console.log(visit('홍'));
+
+    //이름값이 인수로 전달되면 인사말 출력, 이름값 미전달시 경고문 출력(조건문, 함수)
+    function introduce(name) {
+      if (name) {
+        console.log(name + '님 반갑습니다.');
+      } else {
+        console.log('사람이름을 인수로 넣어주세요.');
+      }
+    }
+    introduce('홍길동');
+
+    /*
+    삼항연산자 (if, else문을 3개의 항을 이용해서 간소화한 형태)
+    삼항연산자를 쓰는 경우는 조건식의 true, false값에 실행할 구문의 한줄의 간단한 구문일때
+    리액트 개발에서 JSX라는 가상돔 출력구문안에는 조건문을 3항 연산자만 사용가능
+    조건식 ? 조건식이 true일때 실행할 구문: 조건식이 false일때 실행할 구문
+     */
+    //  삼항연산자로 고도화시킨 함수  //젤많이 씀
+    function introduce2(name) {
+      name ? console.log(name + '님 반갑습니다.') : console.log('사람이름을 인수로 넣어주세요.');
+
+    }
+
+    //인수값이 있을때만 실행되는 함수를 작성시, else필요없을때
+    function introduce2(name) {
+      if (name) console.log(name + '님 반갑습니다.');
+    }
+
+    //name값이 있을때만 실행, else필요없을때 //젤많이 씀
+    function introduce2(name) {
+      name && console.log(name + '님 반갑습니다.');
+    }
+
+
+    function introduce2(name) {
+      let result = '';
+      //&&연산자뒤에 대입연산자가 들어올수 없으므로 (대입연산구문을 괄호처리해서 그룹화)
+      //      name && result = name;
+      //아래처럼하기    
+      name && (result = name);
+
+      return result;
+    }
+
+    //이렇게 많이씀(강사님이라면 else필요시 이렇게 쓸거임(?))
+    function introduce2(name) {
+      let defaultName = '아무개';
+      //name에 암것도 없으면 아무개로 콘솔 출력(name에defaultName값 대입)
+      !name && (name = defaultName); //이거는 앞에 false면 뒤에 true거로 실행한다 이거임.
+      //name에 뭐가 있으면 name값으로 출력
+      console.log(name + '님 반갑습니다.');
+
+    }
+
+
   </script>
 </body>
 
