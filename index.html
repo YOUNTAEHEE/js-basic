@@ -13,118 +13,45 @@
 
   <script>
     /*
-    함수의 종류
-    익명함수:함수에 이름이 없는 형태(변수에 익명함수를 대입해서 주로 호출)
-    기명함수:함수에 이름이 있는 형태(function키워드로 선언하고 호출)
- 
-    선언적함수:function 키워드로 이름을 붙여서 선언하는 형태
-    :함수의 호출 위치가 자유로움(함수 선언이전에 호출가능)
-    선언적함수가 선언되기 전에 호출가능한 이유
-    :자바스크립트 파일을 실행하기 이전에 판단단계에서 미리 변수와 선언적함수를 우선적으로 해석하기 때문 호출 가능
-    대입형함수 :일반변수에 일반함수를 대입하는 형태
-    :함수가 변수에 대입되는 형태이기 때문에 함수가 대입된 이후에만 호출가능
-    즉시실행함수:익명함수 형태로 함수를 정의하자마자 자기자신을 즉시 호출하는 함수 형태
- 
-    ES6
-    화살표함수:익명함수를 간소화 처리(내부적으로 this객체를 생성하지 않는 함수)
+    반복문:여러번 반복되는 특정코드를 자동반복처리
+    내장함수:이미시스템에 정의되어 있는 함수
+    for(자바스크립트 기본내장함수), forEach, map(배열전용 내장함수)
     */
-
-    /*
-    //선언적 함수
-    function plus(num1, num2) {
-      return num1 + num2;
-
+    //for문 패턴: for(초기값; 반복범위; 반복방식){반복될 코드}
+    for (let i = 1; i <= 100; i++) {
+      console.log(i);
     }
-    console.log(plus(2, 3));
-
-
-//아래의 경우에도 console출력이 됨
-    console.log(plus(2, 3));
-
-    function plus(num1, num2) {
-      return num1 + num2;
-
+    //for문으로 배열 반복처리
+    const colors = ['red', 'green', 'blue', 'yellow'];
+    for (let i = 0; i < colors.length; i++) {
+      console.log(colors[i]);
     }
-*/
-    /*
-        //대입형함수//익명함수
-        const minus = function (num1, num2) {
-          return num1 - num2;
-        }
-        console.log(minus(5, 2));
-    
-        //아래의 경우 출력안됨
-        console.log(minus(5, 2));
-    
-        const minus = function (num1, num2) {
-          return num1 - num2;
-        }
-    
+    //forEach로 반복처리
+    //forEach안쪽에 함수를 인수로 전달
+    //forEach안쪽에 인수로 전달되는 매개변수로는 다음의 값들이 자동 전달됨
+    //첫번째 인수(현재 반복도는 배열의 각 데이터 값)
+    //두번째 인수(현재반복도는 순번)
+    //세번째 인수(반복도는 원본배열값 전체)//세번째는 잘 안씀
+    /*colors.forEach(function (data, index, arr) {
+      console.log('data', data);
+      console.log('index', index);
+      console.log('arr', arr);
+
+    });
     */
+    const names = ['홍길동', '김판섭', '박영철'];
+    //배열값을 인수로 받아서 누구님 반갑습니다 라는 콘솔문을 자동 반복해주는 함수 생성
 
-    //화살표함수는 대입형함수처럼 써야함. (리액트)
-    //리액트 개발아닐시에는 선언적 함수처럼 씀 근데 리액트는 대입형함수로 함 (함수선언이전에 호출, 함수선언이후에 호출)
-    /*  
-      선언적함수는 읽히는 시점이 
-      런타임..?, 순차적.. 런타임.. 
-      자바스크립트가 
-      우선적으로 실행시 확인하는게 변수, 그다음 선언적함수 확인
-      대입형함수는    
-      console.log(minus);
-      
-          var minus = function (num1, num2) {
-            return num1 - num2;
-          }
-      ->undefined로 뜸:
-      메모리가 읽는데 값이 할당 안됨.런타임 판단단계에서 다 읽어서 이미 마이너스 변수를 읽어서 언디파인드값이 들어가지는거임, 함수를 읽기 전에 변수를 먼저 읽으니까.못읽게 하려는 게 let으로 변수를 선언하는 것임.
-   // 변수에 선언된값까지 읽어주지는 않음
-  */
-    /*
-    화살표 함수(대입형함수를 축약한 형태)
-        const multiply=(num1, num2)=>{
-          return num1*num2;
-        }
-        const result=multiply(2, 3);
-        console.log('multiply', result);
-        
-        //화살표함수에서 return문 생략한 형태
-          const multiply2=(num1, num2)=>( 
-            //화살표뒤에 중괄호가 없고 특정값을 도출하는 연산식이 있으면 해당 값 자동리턴
-          num1*num2;
-        )
-        console.log('multiply2', multiply2(3,5));
-    
-        //최종적으로 이렇게 씀 
-        const multiply2=(num1, num2)=>  num1*num2;    
-        //화살표 뒤에 중괄호 리턴문 없이 바로 연산식이 있으면 해당값 자체가 리턴되는 형태
-        const multiply=(num1, num2)=>{
-          return num1*num2;
-        }
-        위의 리턴함수와 동일한 구문
-    
-        굳이 리턴할 필요가 없는 함수라도 코드의 간결화를 위해 축약하는 경우도 있음
-        const introduce3 = name =>console.log(name + '님 반갑습니다.');
-        introduce3('홍길동');
-    
-        const introduce3 = name =>name && console.log(name + '님 반갑습니다.');
-        introduce3('홍길동');
-        
-    */
-    //오늘 수업내용에서 무조건 이해해야되는 내용
-    //1. 함수에 인수 전달하고 내부값 리턴으로 내보내기
-    const multiply = (num1, num2) => {
-      return num1 * num2;
+    names.forEach(function (data) {
+      console.log(data + '님 반갑습니다.');
+    });
+    //강사님이 하신거
+    function intro(arr) {
+      arr.forEach(function (data) {
+        console.log(data + '님 반갑습니다.');
+      })
     }
-    const result = multiply(2, 3);
-    console.log('multiply', result);
-
-    //2.함수안쪽에서 조건문과 리턴을 활용해 함수 강제 종료
-    function intro(name) {
-      if (!name) return;
-      console.log(name + '님 반갑습니다.');
-    }
-    intro('홍길동');
-    intro();
+    intro(names);
 
   </script>
 </body>
